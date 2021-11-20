@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>National Park Tracker</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'parksApp/style.css' %}">
+    </head>
+    <body>
+        <div class="cyan stuff-box">
+            <h1>National Parks</h1>
+            {% if parks_list %}
+                {% for park in parks_list %}
+                    <div class="blue stuff-box">
+                        <h2>{{ park.name }}</h2>
+                        <p>{{ park.description }}</p>
+                        <p><a href="{{park.link_to_website}}">Link to website</a></p>
+                        <p>Directions Information: {{park.directionsInfo}}</p>
+                        <p><a href="{{park.directionsURL}}">Directions Link</a></p>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </body>
+</html>
