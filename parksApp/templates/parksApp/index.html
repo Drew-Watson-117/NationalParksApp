@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
     <head>
@@ -10,13 +11,18 @@
             <h1>National Parks</h1>
             {% if parks_list %}
                 {% for park in parks_list %}
-                    <div class="blue stuff-box">
+                    <div class="blue stuff-box" id="{{ park.id }}">
                         <h2>{{ park.name }}</h2>
                         <p>{{ park.description }}</p>
-                        <p><a href="{{park.link_to_website}}">Link to website</a></p>
-                        <p>Directions Information: {{park.directionsInfo}}</p>
+                        <p><a href="{{park.link_to_website}}">More Information</a></p>
+                        <h4>Directions Information:</h4>
+                        <p>{{park.directionsInfo}}</p>
                         <p><a href="{{park.directionsURL}}">Directions Link</a></p>
+                        <script>
+                            document.getElementById("{{ park.id }}").addEventListener("click", event=>{window.location="{% url 'park' park.id%}"});
+                        </script>
                     </div>
+                    
                 {% endfor %}
             {% endif %}
         </div>
