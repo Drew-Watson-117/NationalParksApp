@@ -10,5 +10,6 @@ urlpatterns = [
     path("<int:pk>/", views.ParkDetailView.as_view(),name="park"),
     path("<int:park_id>/toggleMark/", views.toggleMark, name="toggleMark"),
     path("<int:park_id>/toggleVisit/", views.toggleVisit, name="toggleVisit"),
+    path("<int:park_id>/addEntry/", views.addEntry, name="addEntry"),
 
 ]

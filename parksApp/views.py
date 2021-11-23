@@ -44,3 +44,21 @@ def toggleVisit(request, park_id):
     park.save()
     return HttpResponseRedirect(reverse('parksApp:park',args=(park.id,)))
     
+def addEntry(request, park_id):
+    park = get_object_or_404(Park, pk=park_id)
+    new_entry= JournalEntry()
+    new_entry.park=park
+    try:
+        new_entry.visitation_date=request.POST['date']
+        new_entry.content=request.POST['content']
+        new_entry.save()
+    except:
+        return render(request, "parksApp/park.html", {'park': park, 'error_message': "Please Do Not Leave Any Fields Blank"})
+    else:
+        return HttpResponseRedirect(reverse('parksApp:park',args=(park.id,)))
+
+def deleteEntry(request, entry_id):
+    entry = get_object_or_404(JournalEntry, pk=entry_id)
+    entry.delete()
+    return HttpResponseRedirect(reverse('parksApp:park',args=(park.id,)))
+    

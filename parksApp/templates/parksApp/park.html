@@ -27,6 +27,31 @@
                 <input type="submit" {%if park.visited is False%}class="white stuff-box" value="Mark As Visited"{%else%}class="green stuff-box" value="Unmark as Visited"{%endif%}>
             </form>
         </div>
+        <div class="blue stuff-box">
+            <!--Journal Entries div-->
+            <form class="green stuff-box" action="{% url 'parksApp:addEntry' park.id%}" method="post">
+                <h3>Make a New Journal Entry:</h3>
+                {% csrf_token %}
+                {%if error_message %}<p><strong>{{error_message}}</strong></p>
+                {%endif%}
+                <label for="date">Visitation Date:</label><br>
+                <input type="date" id="date" name="date"><br>
+                <label for="content"> Journal Entry Here:</label><br>
+                <textarea cols="30" rows="10" id="content" name="content"></textarea><br>
+                <input type="submit" value="Submit Entry" class="blue stuff-box">
+            </form>
+            {%if park.journalentry_set.count > 0 %}
+                {% for entry in park.journalentry_set.all %}
+                <div class="cyan stuff-box">
+                    <h2>{{entry.visitation_date}}</h2>
+                    <p>{{entry.content}}</p>
+                    <form action="{% url 'parksApp:deleteEntry' entry.id%}" method="post">
+                        <input type="submit" value="Delete Entry" class="red stuff-box">
+                    </form>
+                </div>
+                {%endfor%}
+            {%endif%}
+        </div>
         
     </body>
 </html>
