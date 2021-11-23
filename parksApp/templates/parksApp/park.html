@@ -9,20 +9,22 @@
     <body>
         <div class="blue stuff-box">
             <h1>{{ park.name }}</h1>
-            <h2><a href="../">Back Home</a></h2>
+            <h2><a href="{% url 'parksApp:index' %}">Back Home</a></h2>
             <img src="{{park.image}}" width="500" height="500"/>
             <p>{{ park.description }}</p>
             <p><a href="{{park.link_to_website}}">Link to website</a></p>
             <h4>Directions Info</h4>
             <p>{{park.directionsInfo}}</p>
             <p><a href="{{park.directionsURL}}">Directions Link</a></p>
-            <!--Marked Button
-            <span {%if park.marked is False%}class="white stuff-box"{%else%}class="green stuff-box"{%endif%} id="mark">{% if park.marked == False %}Bookmark this park {% else %}Marked!{% endif %}</span>
-            <script>document.getElementById("mark").addEventListener("click", event=>{});</script>
-            -->
-            <form action="{% url 'toggleMark' park.id %}" method="post">
+            <!--Marked button-->
+            <form action="{% url 'parksApp:toggleMark' park.id %}" method="post">
                 {% csrf_token %}
                 <input type="submit" {%if park.marked is False%}class="white stuff-box" value="Bookmark"{%else%}class="green stuff-box" value="Unmark"{%endif%}>
+            </form>
+            <!--Visited Button-->
+            <form action="{% url 'parksApp:toggleVisit' park.id %}" method="post">
+                {% csrf_token %}
+                <input type="submit" {%if park.visited is False%}class="white stuff-box" value="Mark As Visited"{%else%}class="green stuff-box" value="Unmark as Visited"{%endif%}>
             </form>
         </div>
         

@@ -37,4 +37,10 @@ def toggleMark(request, park_id):
     park.marked = not park.marked
     park.save()
     return HttpResponseRedirect(reverse('parksApp:park',args=(park.id,)))
-    #return render(request, "parksApp/park.html", {'park': park})
+
+def toggleVisit(request, park_id):
+    park = get_object_or_404(Park, pk=park_id)
+    park.visited = not park.visited
+    park.save()
+    return HttpResponseRedirect(reverse('parksApp:park',args=(park.id,)))
+    
