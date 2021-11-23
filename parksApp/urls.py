@@ -11,5 +11,6 @@ urlpatterns = [
     path("<int:park_id>/toggleMark/", views.toggleMark, name="toggleMark"),
     path("<int:park_id>/toggleVisit/", views.toggleVisit, name="toggleVisit"),
     path("<int:park_id>/addEntry/", views.addEntry, name="addEntry"),
+    path("<int:entry_id>/deleteEntry/", views.deleteEntry, name="deleteEntry"),
 
 ]

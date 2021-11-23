@@ -59,6 +59,7 @@ def addEntry(request, park_id):
 
 def deleteEntry(request, entry_id):
     entry = get_object_or_404(JournalEntry, pk=entry_id)
+    park=entry.park
     entry.delete()
     return HttpResponseRedirect(reverse('parksApp:park',args=(park.id,)))
     

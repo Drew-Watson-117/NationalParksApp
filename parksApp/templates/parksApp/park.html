@@ -45,7 +45,8 @@
                 <div class="cyan stuff-box">
                     <h2>{{entry.visitation_date}}</h2>
                     <p>{{entry.content}}</p>
-                    <form action="{% url 'parksApp:deleteEntry' entry.id%}" method="post">
+                    <form action="{% url 'parksApp:deleteEntry' entry.id %}" method="post">
+                        {%csrf_token%}
                         <input type="submit" value="Delete Entry" class="red stuff-box">
                     </form>
                 </div>
