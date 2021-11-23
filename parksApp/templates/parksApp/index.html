@@ -14,10 +14,7 @@
                     <div class="blue stuff-box" id="{{ park.id }}">
                         <h2>{{ park.name }}</h2>
                         <p>{{ park.description }}</p>
-                        <p><a href="{{park.link_to_website}}">More Information</a></p>
-                        <h4>Directions Information:</h4>
-                        <p>{{park.directionsInfo}}</p>
-                        <p><a href="{{park.directionsURL}}">Directions Link</a></p>
+                        <p>Click on me, or go to <a href="{{park.link_to_website}}">this link</a> for more information</p>
                         <script>
                             document.getElementById("{{ park.id }}").addEventListener("click", event=>{window.location="{% url 'park' park.id%}"});
                         </script>

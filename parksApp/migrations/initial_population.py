@@ -6,6 +6,7 @@ import json
 from parksApp.models import Park
 
 def populate(apps, schemea_editor):
+    #For testing: url=https://developer.nps.gov/api/v1/parks?api_key=CNfDJ9AMlCzEZytqNvovbajRd7cGVcElLeKUS2bz
     apiKey="CNfDJ9AMlCzEZytqNvovbajRd7cGVcElLeKUS2bz"
     url=f"https://developer.nps.gov/api/v1/parks?api_key={apiKey}"
     response = requests.get(url)

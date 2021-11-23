@@ -1,6 +1,8 @@
-from django.shortcuts import render
+from django.http.response import HttpResponseRedirect
+from django.shortcuts import render, get_object_or_404
 from django.views import generic
 from django.utils import timezone
+from django.urls import reverse
 
 from .models import Park, JournalEntry
 
@@ -30,9 +32,9 @@ class ParkDetailView(generic.DetailView):
     model=Park
     template_name="parksApp/park.html"
 
-#class JournalEntriesView(generic.ListView):
-#    template_name='parksApp/entries.html'
-#    context_object_name='entry_list'
-#    def get_queryset(self):
-#        entry_list=JournalEntry.objects.all()
-#        return entry_list
+def toggleMark(request, park_id):
+    park = get_object_or_404(Park, pk=park_id)
+    park.marked = not park.marked
+    park.save()
+    return HttpResponseRedirect(reverse('parksApp:park',args=(park.id,)))
+    #return render(request, "parksApp/park.html", {'park': park})

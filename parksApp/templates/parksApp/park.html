@@ -16,7 +16,15 @@
             <h4>Directions Info</h4>
             <p>{{park.directionsInfo}}</p>
             <p><a href="{{park.directionsURL}}">Directions Link</a></p>
+            <!--Marked Button
+            <span {%if park.marked is False%}class="white stuff-box"{%else%}class="green stuff-box"{%endif%} id="mark">{% if park.marked == False %}Bookmark this park {% else %}Marked!{% endif %}</span>
+            <script>document.getElementById("mark").addEventListener("click", event=>{});</script>
+            -->
+            <form action="{% url 'toggleMark' park.id %}" method="post">
+                {% csrf_token %}
+                <input type="submit" {%if park.marked is False%}class="white stuff-box" value="Bookmark"{%else%}class="green stuff-box" value="Unmark"{%endif%}>
+            </form>
         </div>
-        <div class="green stuff-box"></div>
+        
     </body>
 </html>
