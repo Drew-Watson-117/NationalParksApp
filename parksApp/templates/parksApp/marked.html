@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>National Park Tracker</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'parksApp/style.css' %}">
+    </head>
+    <body>
+        <div class="cyan stuff-box">
+            <h1>Bookmarked Parks</h1>
+            <h2><a href="{% url 'parksApp:index' %}">Back Home</a></h2>
+            {% if parks_list %}
+                {% for park in parks_list %}
+                    {%if park.marked%}
+                    <div class="blue stuff-box" id="{{ park.id }}">
+                        <h2>{{ park.name }}</h2>
+                        <p>{{ park.description }}</p>
+                        <h4>Click on me, or go to <a href="{{park.link_to_website}}">this link</a> for more information</h4>
+                        <script>
+                            document.getElementById("{{ park.id }}").addEventListener("click", event=>{window.location="{% url 'parksApp:park' park.id%}"});
+                        </script>
+                    </div>
+                    {%endif%}
+                {% endfor %}
+            {% endif %}
+        </div>
+    </body>
+</html>
